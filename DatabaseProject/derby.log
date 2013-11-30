@@ -1,10 +1,10 @@
 ----------------------------------------------------------------
-Wed Nov 20 10:08:05 EST 2013:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0142-760d-cd7b-00000eb26818 
-on database directory /Users/Daniel/Desktop/DatabaseExampleApplication/COSC457-Chapter3-DB  with class loader sun.misc.Launcher$AppClassLoader@361bb8ea 
-Loaded from file:/Users/Daniel/Desktop/DatabaseExampleApplication/lib/derby.jar
+Sat Nov 30 13:29:24 EST 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-0142-aa45-b65a-00000eb2ae08 
+on database directory /Users/Daniel/Dropbox/Database/COSC457/DatabaseProject/COSC457-Chapter3-DB  with class loader sun.misc.Launcher$AppClassLoader@361bb8ea 
+Loaded from file:/Users/Daniel/Dropbox/Database/COSC457/DatabaseProject/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_40-b43
-user.dir=/Users/Daniel/Desktop/DatabaseExampleApplication
+user.dir=/Users/Daniel/Dropbox/Database/COSC457/DatabaseProject
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
