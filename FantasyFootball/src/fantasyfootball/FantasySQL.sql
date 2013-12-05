@@ -1,96 +1,89 @@
--- The line below is only for SQLite, if used.
---PRAGMA foreign_keys = ON;
-
------------------------------------------------
-------------- Drop the old Tables -------------
------------------------------------------------ 
-
----------------------------------------------
-------------- Create the Tables -------------
----------------------------------------------
-
--- Create table establishing keys with the attribute declarations.  This ends up
--- forcing the DBMS to automatically generate constraint names, which can make
--- things difficult if you ever need to alter the constraints.
 create table PLAYER
 (
-	UUID NUMERIC(9) primary key,
+	UUID INT ,
 	FNAME VARCHAR(32),
 	POS VARCHAR(1),
 	LNAME VARCHAR(32),
 	INJ BOOLEAN,
-	DPICK NUMERIC(12),
-	POS_UUID NUMERIC(9),
+	DPICK INT,
+	POS_UUID INT,
+        PRIMARY KEY(UUID)
 	
 );
 
-create table K
+CREATE TABLE K
 (
-	UUID NUMERIC(9),
-	BELFORTY INT(3),
-	FORTYFIFTY INT(3),
-	FIFTYUP INT(3),
-	MADE INT(3),
-        ATT INT(3),
-        EXTRAMADE INT(3),
-        EXTRAATT INT(3)
+	K_UUID INT,
+	BELFORTY INT,
+	FORTYFIFTY INT,
+	FIFTYUP INT,
+	MADE INT,
+        ATT INT,
+        EXTRAMADE INT,
+        EXTRAATT INT,
+        PRIMARY KEY(K_UUID)
 );
 
 create table DEFST(
-        UUID NUMERIC(9),
-        TD INT(3),
-        INTER INT(3),
-        FR INT(3),
-        SCK INT(3),
-        SFTY INT(3),
-        BLK INT(3),
-        PA INT(3)
+        DEF_UUID INT,
+        TD INT,
+        INTER INT,
+        FR INT,
+        SCK INT,
+        SFTY INT,
+        BLK INT,
+        PA INT,
+        PRIMARY KEY(DEF_UUID)
 );
 
 create table RB
 (
-        UUID NUMERIC(9),
-        RATT INT(3),
-        RYDS INT(3),
-        RAVG INT(3),
-        RTD INT(3),
-        REC INT(3),
-        RECYDS INT(3),
-        RECTD INT(3),
-        TAR INT(3)
+        RB_UUID INT,
+        RATT INT,
+        RYDS INT,
+        RAVG INT,
+        RTD INT,
+        REC INT,
+        RECYDS INT,
+        RECTD INT,
+        TAR INT,
+        PRIMARY KEY(RB_UUID)
 );
 
 create table WRTE
 (
-        UUID NUMERIC(9),
-        RATT INT(3),
-        RYDS INT(3),
-        RAVG INT(3),
-        RTD INT(3),
-        REC INT(3),
-        RECYDS INT(3),
-        RECTD INT(3),
-        TAR INT(3)
+        WR_UUID INT,
+        RATT INT,
+        RYDS INT,
+        RAVG INT,
+        RTD INT,
+        REC INT,
+        RECYDS INT,
+        RECTD INT,
+        TAR INT,
+        PRIMARY KEY(WR_UUID)
 );
 
 create table QB
 (
-        UUID NUMERIC(9),
-        PCTCOM DECIMAL(3),
-        PYDS INT(3),
-        PTD INT(3),
-        INTFUM INT(3),
-        RYDS INT(3),
-        RTD INT(3),
-        RATT INT(3)
+        QB_UUID INT,
+        PCTCOM DECIMAL,
+        PYDS INT,
+        PTD INT,
+        INTFUM INT,
+        RYDS INT,
+        RTD INT,
+        RATT INT,
+        PRIMARY KEY(QB_UUID)
 );
 
-create table GAME
+CREATE TABLE GAME
 (
-        G_UUID NUMERIC(9),
-        ASCORE INT(3),
-        HSCORE INT(3),
-        ATEAM INT(3),
-        HTEAM INT(3),
-        VENUE VARCHAR(32)
+        G_UUID INT,
+        ASCORE INT,
+        HSCORE INT,
+        ATEAM INT,
+        HTEAM INT,
+        VENUE VARCHAR(32),
+        PRIMARY KEY(G_UUID)
 );
