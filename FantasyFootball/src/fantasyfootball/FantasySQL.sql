@@ -87,3 +87,19 @@ CREATE TABLE GAME
         VENUE VARCHAR(32),
         PRIMARY KEY(G_UUID)
 );
+
+CREATE TABLE USR
+(
+        USER_UUID INT,
+        FNAME VARCHAR(32),
+        LNAME VARCHAR(32),
+        BDATE INT
+);
+
+CREATE TABLE TEAM
+(
+        TEAM_UUID INT,
+        TNAME VARCHAR(32),
+        FDATE INT,
+        DDATE INT
+);
