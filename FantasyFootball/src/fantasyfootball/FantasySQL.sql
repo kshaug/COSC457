@@ -1,4 +1,6 @@
-create table PLAYER
+/* table PLAYER
+
+This table describes the superclass attributes that each player inherits 
 (
 	UUID INT ,
 	FNAME VARCHAR(32),
@@ -9,11 +11,20 @@ create table PLAYER
 	POS_UUID INT,
         PRIMARY KEY(UUID)
 	
-);
+);  */
 
 CREATE TABLE K
 (
-	K_UUID INT,
+	UUID INT ,
+	FNAME VARCHAR(32),
+	POS VARCHAR(1),
+	LNAME VARCHAR(32),
+	INJ BOOLEAN,
+	DPICK INT,
+	POS_UUID INT,
+        PRIMARY KEY(UUID),
+        -------------------
+        K_UUID INT,
 	BELFORTY INT,
 	FORTYFIFTY INT,
 	FIFTYUP INT,
@@ -25,6 +36,15 @@ CREATE TABLE K
 );
 
 create table DEFST(
+        UUID INT ,
+	FNAME VARCHAR(32),
+	POS VARCHAR(1),
+	LNAME VARCHAR(32),
+	INJ BOOLEAN,
+	DPICK INT,
+	POS_UUID INT,
+        PRIMARY KEY(UUID),
+        -------------------
         DEF_UUID INT,
         TD INT,
         INTER INT,
@@ -38,6 +58,15 @@ create table DEFST(
 
 create table RB
 (
+        UUID INT ,
+	FNAME VARCHAR(32),
+	POS VARCHAR(1),
+	LNAME VARCHAR(32),
+	INJ BOOLEAN,
+	DPICK INT,
+	POS_UUID INT,
+        PRIMARY KEY(UUID),
+        -------------------
         RB_UUID INT,
         RATT INT,
         RYDS INT,
@@ -52,6 +81,15 @@ create table RB
 
 create table WRTE
 (
+        UUID INT ,
+	FNAME VARCHAR(32),
+	POS VARCHAR(1),
+	LNAME VARCHAR(32),
+	INJ BOOLEAN,
+	DPICK INT,
+	POS_UUID INT,
+        PRIMARY KEY(UUID),
+        -----------------------------
         WR_UUID INT,
         RATT INT,
         RYDS INT,
@@ -66,6 +104,15 @@ create table WRTE
 
 create table QB
 (
+        UUID INT ,
+	FNAME VARCHAR(32),
+	POS VARCHAR(1),
+	LNAME VARCHAR(32),
+	INJ BOOLEAN,
+	DPICK INT,
+	POS_UUID INT,
+        PRIMARY KEY(UUID),
+        ----------------------
         QB_UUID INT,
         PCTCOM DECIMAL,
         PYDS INT,
@@ -90,10 +137,11 @@ CREATE TABLE GAME
 
 CREATE TABLE USR
 (
-        USER_UUID INT,
+        USERNAME VARCHAR(32),
         FNAME VARCHAR(32),
         LNAME VARCHAR(32),
         BDATE INT
+        PRIMARY KEY(USERNAME)
 );
 
 CREATE TABLE TEAM
