@@ -6,6 +6,7 @@
 
 package fantasyfootball;
 import java.sql.*;
+//import java.util.*;
 import org.apache.derby.jdbc.ClientDriver;
 
 
@@ -27,7 +28,7 @@ public class DBAccess {
     }catch(ClassNotFoundException e){
         System.out.println(e);}*/
          DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
-         this.dbConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/Fantasy");
+         this.dbConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/FantasyFootball");
          this.statement = this.dbConnection.createStatement();
 }
     public ResultSet get_players() throws SQLException
@@ -35,5 +36,24 @@ public class DBAccess {
         ResultSet results = this.statement.executeQuery(GET_PLAYERS);
         return results;
     }
+    
+    public String createUser(String lname, String fname, int age, String username, Date bdate)
+    {
+        try
+        {
+        String useradd = "INSERT INTO FANTASYUSER VALUES(" + String.valueOf(age) +
+                ", " + fname + ", "+ lname + ", " + username + ", '" + bdate.toString() + "')"; //insert command
+        
+        this.statement.executeUpdate(useradd); //execute insert
+        }
+        catch(SQLException e)
+        {
+            return e.getMessage();//if excepted return error
+        }
+        
+        return "Successfully added user!";//else return success message
+    }
+        
+        
     
 }
