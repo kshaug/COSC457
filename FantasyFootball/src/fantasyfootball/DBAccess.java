@@ -42,7 +42,8 @@ public class DBAccess {
         try
         {
         String useradd = "INSERT INTO FANTASYUSER VALUES(" + String.valueOf(age) +
-                ", " + fname + ", "+ lname + ", " + username + ", '" + bdate.toString() + "')"; //insert command
+                ", " + fname + ", "+ lname + ", " + username + ", '" + bdate.toString() + "', "
+                + "null, null, null, null, null, null)"; //insert command
         
         this.statement.executeUpdate(useradd); //execute insert
         }
@@ -53,7 +54,53 @@ public class DBAccess {
         
         return "Successfully added user!";//else return success message
     }
-        
+
+    public String draftPlayer(String position, int uuid, int pick, String username) //draft player
+    {                                                                    //position MUST be the same as shown in DB
+        try
+        {
+            String pos = position.toUpperCase();
+            
+            String draft_player = "UPDATE " + pos + " SET DPICK = " + pick
+                    + " WHERE " + pos +"_UUID = " + uuid;//update the draft pick field for player
+            
+            this.statement.executeUpdate(draft_player);
+            
+            switch(pos){//update position in user table based on position user selected
+                case "K":
+                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"
+                            + " K_UUID =" + uuid + " WHERE USERNAME = " + username);
+                    return "Success";
+                case "DEFST":
+                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"
+                            + " DEFST_UUID =" + uuid + " WHERE USERNAME = " + username);
+                    return "Success";
+                case "QB":
+                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"
+                            + " QB_UUID =" + uuid + " WHERE USERNAME = " + username);
+                    return "Success";
+                case "RB":
+                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"
+                            + " RB_UUID =" + uuid + " WHERE USERNAME = " + username);
+                    return "Success";
+                case "WRTE"://since there are two WR slots, if WR1 is null update, else if WR2 hasn't been updated update
+                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"//note: WR2 is updated when WR1 is updated
+                            + " WR1_UUID = COALESCE(WR1_UUID," + uuid + "),"
+                            + "WR2_UUID = (CASE WHEN WR2_UUID = WR1_UUID THEN " + uuid + " ELSE " +
+                            uuid + "END)"
+                            + " WHERE USERNAME = " + username );
+                    return "Success";
+                           
+            }
+                        
+            
+            return "Successfully drafted!";
+        }
+        catch(SQLException e)
+        {
+            return e.getMessage();
+        }
+    }
         
     
 }

@@ -40,7 +40,7 @@ CREATE TABLE K
 );
 
 create table DEFST(
-        DEF_UUID INT,
+        DEFST_UUID INT,
         TD INT,
         INTER INT,
         FR INT,
@@ -54,7 +54,7 @@ create table DEFST(
         PROTEAM VARCHAR(32),
 	INJ BOOLEAN,
 	DPICK INT,
-        PRIMARY KEY(DEF_UUID)
+        PRIMARY KEY(DEFST_UUID)
 );
 
 create table RB
@@ -79,7 +79,7 @@ create table RB
 
 create table WRTE
 (
-        WR_UUID INT,
+        WRTE_UUID INT,
         RATT INT,
         RYDS INT,
         RAVG INT,
@@ -94,8 +94,25 @@ create table WRTE
         PROTEAM VARCHAR(32),
 	INJ BOOLEAN,
 	DPICK INT,
-        PRIMARY KEY(WR_UUID)
+        PRIMARY KEY(WRTE_UUID)
 );
+
+CREATE TABLE FANTASYUSER
+(
+        AGE INT,
+        FNAME VARCHAR(32),
+        LNAME VARCHAR(32),
+        USERNAME VARCHAR(32),
+        BDATE DATE,
+        QB_UUID INT,
+        RB_UUID INT,
+        WR1_UUID INT,
+        WR2_UUID INT,
+        K_UUID INT,
+        DEFST_UUID INT,
+        PRIMARY KEY(USERNAME)
+);
+
 
 create table QB
 (
@@ -127,18 +144,10 @@ CREATE TABLE GAME
         PRIMARY KEY(G_UUID)
 );
 
-CREATE TABLE FANTASYUSER
-(
-        AGE INT,
-        FNAME VARCHAR(32),
-        LNAME VARCHAR(32),
-        USERNAME VARCHAR(32),
-        BDATE DATE,
-);
 
 INSERT INTO DEFST VALUES(1, 0, 0, 0, 0, 0, 0, 0, 'Baltimore', 'DEF/ST', 'Ravens', 'Baltimore Ravens', FALSE, NULL);
 
-INSERT INTO K VALUES(1, 0, 0, 0, 0, 0, 0, 0, , 'Justin', 'K', 'Tucker', 'Baltimore Ravens', FALSE, NULL);
+INSERT INTO K VALUES(1, 0, 0, 0, 0, 0, 0, 0, 'Justin', 'K', 'Tucker', 'Baltimore Ravens', FALSE, NULL);
 
 INSERT INTO RB VALUES(1, 0, 0, 0, 0, 0, 0, 0, 0, 'Vonta', 'RB', 'Leach', 'Baltimore Ravens', FALSE, NULL);
 
