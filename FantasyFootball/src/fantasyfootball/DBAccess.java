@@ -61,6 +61,13 @@ public class DBAccess {
         {
             String pos = position.toUpperCase();
             
+            ResultSet is_drafted = this.statement.executeQuery("SELECT DPICK FROM " + pos + " WHERE " + pos +"_UUID=" + uuid);
+            
+            is_drafted.next();
+            
+            if(is_drafted.getInt("DPICK")==0)//if player is currently undrafted, draft else return error
+            {
+            
             String draft_player = "UPDATE " + pos + " SET DPICK = " + pick
                     + " WHERE " + pos +"_UUID = " + uuid;//update the draft pick field for player
             
@@ -95,6 +102,11 @@ public class DBAccess {
                         
             
             return "Successfully drafted!";
+            }
+            else
+            {
+                return "Sorry this player is already drafted!";
+            }
         }
         catch(SQLException e)
         {
@@ -102,5 +114,70 @@ public class DBAccess {
         }
     }
         
-    
-}
+        public String dropPlayer(String pos, int uuid, String username)
+        {
+           pos = pos.toUpperCase();
+            
+            try
+            {
+                 String drop_player = "UPDATE " + pos + " SET DPICK = 0 WHERE " + pos +"_UUID = " + uuid;//reset the DraftPick number
+                 this.statement.executeUpdate(drop_player);
+                 
+            switch(pos){//update the uuid to null of the selected player, by UUID
+                case "K":
+                    this.statement.executeUpdate("UPDATE FANTASYUSER SET K_UUID=NULL WHERE K_UUID =" + uuid + " AND "
+                            + "FANTASYUSER.USERNAME = " + username);
+                    return "Success";
+                case "DEFST":
+                    this.statement.executeUpdate("UPDATE FANTASYUSER SET DEFST_UUID=NULL WHERE DEFST_UUID =" + uuid+ " AND "
+                            + "FANTASYUSER.USERNAME = " + username);
+                    return "Success";
+                case "QB":
+                    this.statement.executeUpdate("UPDATE FANTASYUSER SET QB_UUID=NULL WHERE QB_UUID = " + uuid+ " AND "
+                            + "FANTASYUSER.USERNAME = " + username);
+                    return "Success";
+                case "RB":
+                    this.statement.executeUpdate("UPDATE FANTASYUSER SET RB_UUID=NULL WHERE RB_UUID =" + uuid+ " AND "
+                            + "FANTASYUSER.USERNAME = " + username);
+                    return "Success";
+                case "WRTE":
+                    ResultSet is_one = this.statement.executeQuery("SELECT WR1_UUID FROM FANTASYUSER WHERE USERNAME =" + username);
+                    is_one.next();//Get WR1_UUID
+                    try{
+                    if(is_one.getInt("WR1_UUID")==uuid)//if the selected WR is WR1 update WR1_UUID field
+                    {
+                        this.statement.executeUpdate("UPDATE FANTASYUSER SET WR1_UUID=NULL WHERE USERNAME =" + username);
+                    }
+                    else//same as WR2
+                    {
+                        ResultSet is_two = this.statement.executeQuery("SELECT WR2_UUID FROM FANTASYUSER WHERE USERNAME =" + username);
+                        is_two.next();
+                        
+                        if(is_two.getInt("WR2_UUID")==uuid)
+                        {
+                            this.statement.executeUpdate("UPDATE FANTASYUSER SET WR2_UUID=NULL WHERE USERNAME =" + username);
+                        }
+                        else
+                        {
+                            return "You dun goofed";//If none of the above conditions apply you dun goofed
+                        }
+                    }
+                    
+                    }
+                    catch(SQLException err)
+                    {
+                        break;
+                    }
+                    return "Success";
+            }
+            
+            }
+            catch(SQLException e)
+                    {
+                    return e.getMessage();
+                    }
+            
+            return "Something weird happened";//if none of the above conditions trigger, default error message cause I have no clue what happened
+            }
+        }
+        
