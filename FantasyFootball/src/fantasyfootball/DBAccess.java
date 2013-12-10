@@ -41,9 +41,9 @@ public class DBAccess {
     {
         try
         {
+        this.statement.executeUpdate("INSERT INTO TEAM VALUES(null, null, null, null, null, null," + username+ ")");
         String useradd = "INSERT INTO FANTASYUSER VALUES(" + String.valueOf(age) +
-                ", " + fname + ", "+ lname + ", " + username + ", '" + bdate.toString() + "', "
-                + "null, null, null, null, null, null)"; //insert command
+                ", " + fname + ", "+ lname + ", " + username + ", '" + bdate.toString() +"')"; //insert command
         
         this.statement.executeUpdate(useradd); //execute insert
         }
@@ -75,23 +75,23 @@ public class DBAccess {
             
             switch(pos){//update position in user table based on position user selected
                 case "K":
-                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"
+                    this.statement.executeUpdate("UPDATE TEAM SET"
                             + " K_UUID =" + uuid + " WHERE USERNAME = " + username);
                     return "Success";
                 case "DEFST":
-                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"
+                    this.statement.executeUpdate("UPDATE TEAM SET"
                             + " DEFST_UUID =" + uuid + " WHERE USERNAME = " + username);
                     return "Success";
                 case "QB":
-                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"
+                    this.statement.executeUpdate("UPDATE TEAM SET"
                             + " QB_UUID =" + uuid + " WHERE USERNAME = " + username);
                     return "Success";
                 case "RB":
-                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"
+                    this.statement.executeUpdate("UPDATE TEAM SET"
                             + " RB_UUID =" + uuid + " WHERE USERNAME = " + username);
                     return "Success";
                 case "WRTE"://since there are two WR slots, if WR1 is null update, else if WR2 hasn't been updated update
-                    this.statement.executeUpdate("UPDATE FANTASYUSER SET"//note: WR2 is updated when WR1 is updated
+                    this.statement.executeUpdate("UPDATE TEAM SET"//note: WR2 is updated when WR1 is updated
                             + " WR1_UUID = COALESCE(WR1_UUID," + uuid + "),"
                             + "WR2_UUID = (CASE WHEN WR2_UUID = WR1_UUID THEN " + uuid + " ELSE " +
                             uuid + "END)"
@@ -125,37 +125,38 @@ public class DBAccess {
                  
             switch(pos){//update the uuid to null of the selected player, by UUID
                 case "K":
-                    this.statement.executeUpdate("UPDATE FANTASYUSER SET K_UUID=NULL WHERE K_UUID =" + uuid + " AND "
-                            + "FANTASYUSER.USERNAME = " + username);
+                    this.statement.executeUpdate("UPDATE TEAM SET K_UUID=NULL WHERE K_UUID =" + uuid + " AND "
+                            + "TEAM.USERNAME = " + username);
                     return "Success";
                 case "DEFST":
-                    this.statement.executeUpdate("UPDATE FANTASYUSER SET DEFST_UUID=NULL WHERE DEFST_UUID =" + uuid+ " AND "
-                            + "FANTASYUSER.USERNAME = " + username);
+                    this.statement.executeUpdate("UPDATE TEAM SET DEFST_UUID=NULL WHERE DEFST_UUID =" + uuid+ " AND "
+                            + "TEAM.USERNAME = " + username);
                     return "Success";
                 case "QB":
-                    this.statement.executeUpdate("UPDATE FANTASYUSER SET QB_UUID=NULL WHERE QB_UUID = " + uuid+ " AND "
-                            + "FANTASYUSER.USERNAME = " + username);
+                    this.statement.executeUpdate("UPDATE TEAM SET QB_UUID=NULL WHERE QB_UUID = " + uuid+ " AND "
+                            + "TEAM.USERNAME = " + username);
                     return "Success";
                 case "RB":
-                    this.statement.executeUpdate("UPDATE FANTASYUSER SET RB_UUID=NULL WHERE RB_UUID =" + uuid+ " AND "
-                            + "FANTASYUSER.USERNAME = " + username);
+                    this.statement.executeUpdate("UPDATE TEAM SET RB_UUID=NULL WHERE RB_UUID =" + uuid+ " AND "
+                            + "TEAM.USERNAME = " + username);
                     return "Success";
                 case "WRTE":
-                    ResultSet is_one = this.statement.executeQuery("SELECT WR1_UUID FROM FANTASYUSER WHERE USERNAME =" + username);
+                    ResultSet is_one = this.statement.executeQuery("SELECT WR1_UUID FROM TEAM WHERE USERNAME =" + username);
+                    int rows = is_one.getRow();
                     is_one.next();//Get WR1_UUID
                     try{
                     if(is_one.getInt("WR1_UUID")==uuid)//if the selected WR is WR1 update WR1_UUID field
                     {
-                        this.statement.executeUpdate("UPDATE FANTASYUSER SET WR1_UUID=NULL WHERE USERNAME =" + username);
+                        this.statement.executeUpdate("UPDATE TEAM SET WR1_UUID=NULL WHERE USERNAME =" + username);
                     }
                     else//same as WR2
                     {
-                        ResultSet is_two = this.statement.executeQuery("SELECT WR2_UUID FROM FANTASYUSER WHERE USERNAME =" + username);
+                        ResultSet is_two = this.statement.executeQuery("SELECT WR2_UUID FROM TEAM WHERE USERNAME =" + username);
                         is_two.next();
                         
                         if(is_two.getInt("WR2_UUID")==uuid)
                         {
-                            this.statement.executeUpdate("UPDATE FANTASYUSER SET WR2_UUID=NULL WHERE USERNAME =" + username);
+                            this.statement.executeUpdate("UPDATE TEAM SET WR2_UUID=NULL WHERE USERNAME =" + username);
                         }
                         else
                         {
@@ -166,7 +167,7 @@ public class DBAccess {
                     }
                     catch(SQLException err)
                     {
-                        break;
+                        return err.getMessage();
                     }
                     return "Success";
             }
