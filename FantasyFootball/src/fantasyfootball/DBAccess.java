@@ -191,5 +191,34 @@ public class DBAccess {
         return sorted_data;
 
     }
-
+    
+    public HashMap<String, String> returnRavens() throws SQLException {
+        HashMap<String, String> sorted_data = new HashMap<String, String>();
+        String[] positions = {"QB", "RB", "K", "WRTE", "DEFST"};//array with all position table names
+        ResultSet data;
+        for(int i=0; i<positions.length; i++)
+        {
+        data = this.statement.executeQuery("SELECT " + positions[i] + ".FNAME, " +positions[i] + ""
+                + ".LNAME FROM " + positions[i] + " WHERE " + positions[i] + ".PROTEAM='Baltimore Ravens'");//select all players of a position from the Ravens
+            while (data.next()) {//while names to get, store names in a hashmap in lastname:firstname format
+                sorted_data.put(data.getString(2), data.getString(1));
+                 }
+        }
+        return sorted_data;
+    }
+    
+    public HashMap<String, String> returnSteelers() throws SQLException {
+        HashMap<String, String> sorted_data = new HashMap<String, String>();
+        String[] positions = {"QB", "RB", "K", "WRTE", "DEFST"};//array with all position table names
+        ResultSet data;
+        for(int i=0; i<positions.length; i++)
+        {
+        data = this.statement.executeQuery("SELECT " + positions[i] + ".FNAME, " +positions[i] + ""
+                + ".LNAME FROM " + positions[i] + " WHERE " + positions[i] + ".PROTEAM='Pittsburgh Steelers'");//select all players of a position from the Ravens
+            while (data.next()) {//while names to get, store names in a hashmap in lastname:firstname format
+                sorted_data.put(data.getString(2), data.getString(1));
+                 }
+        }
+        return sorted_data;
+    }
 }

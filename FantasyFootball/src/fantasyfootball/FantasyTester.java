@@ -22,7 +22,7 @@ public class FantasyTester {
        Date bday = new Date(10000000);
        
        System.out.println(bday.getClass());
-       HashMap<String, String> x = dba.returnAllNames();
+       HashMap<String, String> x = dba.returnSteelers();
        for(Map.Entry entry : x.entrySet())
        {
            System.out.println(entry.getKey() + "," + entry.getValue());
