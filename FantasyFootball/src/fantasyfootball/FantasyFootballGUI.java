@@ -6,14 +6,26 @@
 
 package fantasyfootball;
 
+import java.sql.SQLException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import static org.eclipse.persistence.expressions.ExpressionOperator.except;
 
 /**
  *
  * @author Daniel
  */
 public class FantasyFootballGUI extends javax.swing.JFrame {
-
+   
+        
+               
+        
+  
     /**
      * Creates new form FantasyFootballGUI
      */
@@ -38,7 +50,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         rosterScrollPane = new javax.swing.JScrollPane();
         rosterList = new javax.swing.JList();
         teamAndPlayerScrollPane = new javax.swing.JScrollPane();
-        PlayerList = new javax.swing.JList();
+        playerList = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
         logInButton = new javax.swing.JButton();
         userNameTextField = new javax.swing.JTextField();
@@ -107,6 +119,9 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel22 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jLabel20 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,8 +139,8 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         rosterList.setBorder(new javax.swing.border.MatteBorder(null));
         rosterScrollPane.setViewportView(rosterList);
 
-        PlayerList.setBorder(new javax.swing.border.MatteBorder(null));
-        teamAndPlayerScrollPane.setViewportView(PlayerList);
+        playerList.setBorder(new javax.swing.border.MatteBorder(null));
+        teamAndPlayerScrollPane.setViewportView(playerList);
 
         jLabel1.setText("Roster");
 
@@ -299,7 +314,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(255, 204, 153));
 
-        jLabel15.setText("Player Type: ");
+        jLabel15.setText("Player Position: ");
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Defense", "Kicker", "Quarterback", "Running Back", "Wide Receiver" }));
 
@@ -408,7 +423,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
         jLabel21.setText("User Teams");
 
-        jLabel24.setText("Player Type:");
+        jLabel24.setText("Player Position:");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Defense", "Kicker", "Quarterback", "Running Back", "Wide Receiver" }));
 
@@ -615,7 +630,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel11.setText("Delete User");
 
-        jLabel12.setText("Players");
+        jLabel12.setText("Users");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -663,6 +678,12 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
             }
         });
 
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane6.setViewportView(jTextArea1);
+
+        jLabel20.setText("User Wall");
+
         javax.swing.GroupLayout usersPanelLayout = new javax.swing.GroupLayout(usersPanel);
         usersPanel.setLayout(usersPanelLayout);
         usersPanelLayout.setHorizontalGroup(
@@ -675,24 +696,29 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                             .addGroup(usersPanelLayout.createSequentialGroup()
                                 .addGap(30, 30, 30)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(135, 135, 135)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(usersPanelLayout.createSequentialGroup()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(usersPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel6))
-                            .addGroup(usersPanelLayout.createSequentialGroup()
-                                .addGap(56, 56, 56)
-                                .addComponent(jLabel22)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jLabel6)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(usersPanelLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel20)
+                        .addGap(141, 141, 141)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, usersPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(usersPanelLayout.createSequentialGroup()
+                .addGap(263, 263, 263)
                 .addComponent(jButton1)
-                .addGap(306, 306, 306))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         usersPanelLayout.setVerticalGroup(
             usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -705,17 +731,23 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addGap(38, 38, 38)
-                .addComponent(jLabel22)
+                .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel20))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                    .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
         usersPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel4, jPanel5});
+
+        usersPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane3, jScrollPane6, jTextField2});
 
         jTabbedPane1.addTab("Users", usersPanel);
 
@@ -753,13 +785,48 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_steelersRadioButtonActionPerformed
 
     private void rosterFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rosterFilterButtonActionPerformed
-     //  DefaultListModel filteredListModel = new DefaultListModel();
-      // String sql;
-       //try{
-        //    if(teamGroupUserRoster.getSelection() == allRadioButton.getModel() ){
-    
-        //    }
-       //}
+       DBAccess db = null;
+        try {
+            db = new DBAccess();
+        } catch (SQLException ex) {
+            Logger.getLogger(FantasyFootballGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultListModel filteredListModel = new DefaultListModel();
+       try{
+            if(teamGroupUserRoster.getSelection().equals(allRadioButton.getModel()) ){
+               HashMap hm = db.returnAllNames();
+               Collection c = hm.values();
+               Iterator itr = c.iterator();
+               while(itr.hasNext()){
+                   String theString = itr.next().toString();
+                   System.out.println(theString);
+                   filteredListModel.addElement(theString);
+               }
+               playerList.setModel(filteredListModel);
+               
+            }else if(teamGroupUserRoster.getSelection().equals(ravensRadioButton.getModel())){
+               HashMap hm = db.returnRavens();
+               Collection c = hm.values();
+               Iterator itr = c.iterator();
+               while(itr.hasNext()){
+                   String theString = itr.next().toString();
+                   System.out.println(theString);
+                   filteredListModel.addElement(theString);
+               }
+               playerList.setModel(filteredListModel);
+            }else if(teamGroupUserRoster.getSelection().equals(steelersRadioButton.getModel())){
+               HashMap hm = db.returnSteelers();
+               Collection c = hm.values();
+               Iterator itr = c.iterator();
+               while(itr.hasNext()){
+                   String theString = itr.next().toString();
+                   System.out.println(theString);
+                   filteredListModel.addElement(theString);
+            }
+          }
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, e);
+       }
     }//GEN-LAST:event_rosterFilterButtonActionPerformed
 
     private void allRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allRadioButtonActionPerformed
@@ -781,7 +848,8 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -815,7 +883,6 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddToRosterButton;
-    private javax.swing.JList PlayerList;
     private javax.swing.JRadioButton allRadioButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -840,6 +907,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
@@ -865,18 +933,21 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JButton logInButton;
     private javax.swing.JButton logOutButton;
+    private javax.swing.JList playerList;
     private javax.swing.JLabel playersAddedLabel;
     private javax.swing.JRadioButton ravensRadioButton;
     private javax.swing.JButton rosterFilterButton;
