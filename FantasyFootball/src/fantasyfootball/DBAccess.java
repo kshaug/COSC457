@@ -223,16 +223,16 @@ public class DBAccess {
         return sorted_data;
     }
     
-<<<<<<< HEAD
 
 
-    public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
-        HashMap<String, String> sorted_data = new HashMap<String, String>();
-=======
+
+   // public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
+     //   HashMap<String, String> sorted_data = new HashMap<String, String>();
+
     public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
         HashMap<String, String> sorted_data = new HashMap<String, String>();
         ResultSet data;
->>>>>>> d18b966a96bdadfb5ead81498c22010aebbe43ca
+
         //returns players that belong to team teamname and are at position pos
         if(teamname=="PIT")//just use "PIT" or "BAL" in method call
         {
@@ -242,9 +242,9 @@ public class DBAccess {
         {
             teamname="'Baltimore Ravens'";
         }
-<<<<<<< HEAD
-        ResultSet data;
-=======
+
+     //   ResultSet data;
+
         else if(teamname=="ALL")
         {
             data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
@@ -255,7 +255,7 @@ public class DBAccess {
         return sorted_data;
         }
         
->>>>>>> d18b966a96bdadfb5ead81498c22010aebbe43ca
+
         
         data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
                 + ".LNAME FROM " + pos + " WHERE " + pos + ".PROTEAM=" + teamname);//select all players of a position from the Ravens
@@ -264,9 +264,9 @@ public class DBAccess {
                  }
         return sorted_data;
     }
-<<<<<<< HEAD
 
-=======
+
+
     
     public ArrayList<String> getUser() throws SQLException//returns an ArrayList of all usernames
     {
@@ -288,5 +288,5 @@ public class DBAccess {
        String name = data.getString(1);
        return name;
    }
->>>>>>> d18b966a96bdadfb5ead81498c22010aebbe43ca
+
 }

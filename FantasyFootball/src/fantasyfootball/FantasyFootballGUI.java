@@ -9,6 +9,7 @@ package fantasyfootball;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.sql.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -59,7 +60,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         logInButton = new javax.swing.JButton();
         userNameTextField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        welcomeLabel = new javax.swing.JLabel();
         logOutButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         ravensRadioButton = new javax.swing.JRadioButton();
@@ -116,11 +117,11 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
+        deleteUsersList = new javax.swing.JList();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList();
+        commentUsersList = new javax.swing.JList();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel22 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -150,6 +151,11 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         jLabel1.setText("Roster");
 
         logInButton.setText("Log in");
+        logInButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logInButtonActionPerformed(evt);
+            }
+        });
 
         userNameTextField.setText("Enter username");
         userNameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -158,7 +164,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Welcome \"User\"");
+        welcomeLabel.setText("Welcome \"User\"");
 
         logOutButton.setText("Log Out");
 
@@ -250,7 +256,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(logInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
+                                .addComponent(welcomeLabel)
                                 .addGap(18, 18, 18)
                                 .addComponent(logOutButton)))
                         .addGap(15, 15, 15))
@@ -274,7 +280,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                     .addComponent(userNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(logInButton)
                     .addComponent(logOutButton)
-                    .addComponent(jLabel2))
+                    .addComponent(welcomeLabel))
                 .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userRosterPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -635,7 +641,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
         jButton3.setText("Delete");
 
-        jScrollPane2.setViewportView(jList3);
+        jScrollPane2.setViewportView(deleteUsersList);
 
         jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel11.setText("Delete User");
@@ -675,7 +681,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        jScrollPane3.setViewportView(jList4);
+        jScrollPane3.setViewportView(commentUsersList);
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -998,25 +1004,56 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void createUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserButtonActionPerformed
-        String theUserName = addUserUserNameTextField.getText();
-        String lname = lNameTextField.getText();
-        String fName = fNameTextField.getText();
-        int year = (Calendar.YEAR+1) - yearComboBox.getSelectedIndex();
-        int month = monthComboBox.getSelectedIndex();
-        int day = dayComboBox.getSelectedIndex();
-        int age = (Calendar.YEAR) - yearComboBox.getSelectedIndex();
-        Date theDate = new Date(100000);  
+       
         
+        DBAccess db = null;
+        try {
+             DefaultListModel filteredListModel = new DefaultListModel();
+            String theUserName = addUserUserNameTextField.getText();
+            String lname = lNameTextField.getText();
+            String fName = fNameTextField.getText();
+            int year = (Calendar.YEAR+1) - yearComboBox.getSelectedIndex();
+            int month = monthComboBox.getSelectedIndex();
+            int day = dayComboBox.getSelectedIndex();
+            int age = (Calendar.YEAR) - yearComboBox.getSelectedIndex();
+            Date theDate = new Date(100000);  
+            db = new DBAccess();
+        
+      
+            String theString = db.createUser(lname, fName, age, theUserName, theDate);
+            ArrayList <String> theList = null;
+            theList = db.getUser();
+      
+           Iterator itr = theList.listIterator();
+            while(itr.hasNext()){
+                String itrNext = itr.next().toString();
+                filteredListModel.addElement(itrNext);
+                System.out.println(1);
+            }
+            deleteUsersList.setModel(filteredListModel);
+            commentUsersList.setModel(filteredListModel);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_createUserButtonActionPerformed
+
+    private void logInButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInButtonActionPerformed
+        String input;
+        input = userNameTextField.getSelectedText();
         DBAccess db = null;
         try {
             db = new DBAccess();
         } catch (SQLException ex) {
             Logger.getLogger(FantasyFootballGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        String theString = db.createUser(lname, fName, age, theUserName, theDate);
-        System.out.println(theUserName);
-    }//GEN-LAST:event_createUserButtonActionPerformed
+        try{
+        String name = db.getUser(input);
+        welcomeLabel.setText("Welcome "+ input);
+        }catch(SQLException e){
+             JOptionPane.showMessageDialog(null, e);
+        }
+       
+    }//GEN-LAST:event_logInButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1058,8 +1095,10 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JButton AddToRosterButton;
     private javax.swing.JTextField addUserUserNameTextField;
     private javax.swing.JRadioButton allRadioButton;
+    private javax.swing.JList commentUsersList;
     private javax.swing.JButton createUserButton;
     private javax.swing.JComboBox dayComboBox;
+    private javax.swing.JList deleteUsersList;
     private javax.swing.JTextField fNameTextField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1079,7 +1118,6 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1093,8 +1131,6 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
-    private javax.swing.JList jList3;
-    private javax.swing.JList jList4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -1134,6 +1170,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JTextField userNameTextField;
     private javax.swing.JPanel userRosterPanel;
     private javax.swing.JPanel usersPanel;
+    private javax.swing.JLabel welcomeLabel;
     private javax.swing.JComboBox yearComboBox;
     // End of variables declaration//GEN-END:variables
 }
