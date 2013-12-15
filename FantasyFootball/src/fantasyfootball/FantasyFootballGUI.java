@@ -6,6 +6,8 @@
 
 package fantasyfootball;
 
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Daniel
@@ -34,23 +36,23 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         userRosterPanel = new javax.swing.JPanel();
         AddToRosterButton = new javax.swing.JButton();
         rosterScrollPane = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        rosterList = new javax.swing.JList();
         teamAndPlayerScrollPane = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        PlayerList = new javax.swing.JList();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        logInButton = new javax.swing.JButton();
+        userNameTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         logOutButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        ravensRadioButton = new javax.swing.JRadioButton();
+        steelersRadioButton = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
+        rosterPlayerTypeComboBox = new javax.swing.JComboBox();
+        rosterFilterButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jLabel12 = new javax.swing.JLabel();
+        allRadioButton = new javax.swing.JRadioButton();
+        playersAddedLabel = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         statsPanel = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -69,11 +71,16 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
         jRadioButton4 = new javax.swing.JRadioButton();
         jRadioButton5 = new javax.swing.JRadioButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jLabel23 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox();
+        jLabel24 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jButton6 = new javax.swing.JButton();
         usersPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -94,9 +101,12 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList4 = new javax.swing.JList();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel22 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,25 +121,20 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
             }
         });
 
-        jList2.setBorder(new javax.swing.border.MatteBorder(null));
-        rosterScrollPane.setViewportView(jList2);
+        rosterList.setBorder(new javax.swing.border.MatteBorder(null));
+        rosterScrollPane.setViewportView(rosterList);
 
-        jList1.setBorder(new javax.swing.border.MatteBorder(null));
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        teamAndPlayerScrollPane.setViewportView(jList1);
+        PlayerList.setBorder(new javax.swing.border.MatteBorder(null));
+        teamAndPlayerScrollPane.setViewportView(PlayerList);
 
         jLabel1.setText("Roster");
 
-        jButton1.setText("Log in");
+        logInButton.setText("Log in");
 
-        jTextField1.setText("Enter username");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        userNameTextField.setText("Enter username");
+        userNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                userNameTextFieldActionPerformed(evt);
             }
         });
 
@@ -139,44 +144,44 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
         jLabel3.setText("Players");
 
-        teamGroupUserRoster.add(jRadioButton1);
-        jRadioButton1.setText("Baltimore Ravens");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        teamGroupUserRoster.add(ravensRadioButton);
+        ravensRadioButton.setText("Baltimore Ravens");
+        ravensRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                ravensRadioButtonActionPerformed(evt);
             }
         });
 
-        teamGroupUserRoster.add(jRadioButton2);
-        jRadioButton2.setText("Pittsburgh Steelers");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        teamGroupUserRoster.add(steelersRadioButton);
+        steelersRadioButton.setText("Pittsburgh Steelers");
+        steelersRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                steelersRadioButtonActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Player Type");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Defense", "Kicker", "Quarterback", "Running Back", "Wide Receiver" }));
+        rosterPlayerTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Defense", "Kicker", "Quarterback", "Running Back", "Wide Receiver" }));
 
-        jButton2.setText("Filter");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        rosterFilterButton.setText("Filter");
+        rosterFilterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                rosterFilterButtonActionPerformed(evt);
             }
         });
 
         jLabel5.setText(" Teams");
 
-        teamGroupUserRoster.add(jRadioButton3);
-        jRadioButton3.setText("All");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        teamGroupUserRoster.add(allRadioButton);
+        allRadioButton.setText("All");
+        allRadioButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                allRadioButtonActionPerformed(evt);
             }
         });
 
-        jLabel12.setText("x players added");
+        playersAddedLabel.setText("x players added");
 
         jSeparator3.setBackground(new java.awt.Color(51, 51, 51));
         jSeparator3.setForeground(new java.awt.Color(51, 51, 51));
@@ -186,105 +191,107 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         userRosterPanelLayout.setHorizontalGroup(
             userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userRosterPanelLayout.createSequentialGroup()
-                .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(userRosterPanelLayout.createSequentialGroup()
-                        .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(userRosterPanelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton1)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jRadioButton3))
-                                .addGap(29, 29, 29))
-                            .addGroup(userRosterPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(userRosterPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jButton2))
-                                .addGap(18, 18, 18)))
-                        .addComponent(teamAndPlayerScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AddToRosterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(userRosterPanelLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel12))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userRosterPanelLayout.createSequentialGroup()
+                            .addComponent(ravensRadioButton)
+                            .addComponent(steelersRadioButton)
+                            .addComponent(jLabel5)
+                            .addComponent(allRadioButton))
+                        .addGap(29, 29, 29))
+                    .addGroup(userRosterPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addGap(190, 190, 190)))
+                        .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(userRosterPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(rosterPlayerTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(rosterFilterButton))
+                        .addGap(18, 18, 18)))
+                .addComponent(teamAndPlayerScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AddToRosterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(userRosterPanelLayout.createSequentialGroup()
-                        .addComponent(rosterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(48, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userRosterPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(117, 117, 117))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userRosterPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(playersAddedLabel)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rosterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
+            .addGroup(userRosterPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator3)
+                .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userRosterPanelLayout.createSequentialGroup()
+                        .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator3)
+                            .addGroup(userRosterPanelLayout.createSequentialGroup()
+                                .addComponent(userNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(logInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(logOutButton)))
+                        .addGap(15, 15, 15))
                     .addGroup(userRosterPanelLayout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(258, 258, 258)
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(logOutButton)))
-                .addGap(15, 15, 15))
+                        .addComponent(jLabel1)
+                        .addGap(154, 154, 154))))
         );
 
-        userRosterPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jTextField1});
+        userRosterPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {logInButton, userNameTextField});
+
+        userRosterPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {rosterScrollPane, teamAndPlayerScrollPane});
 
         userRosterPanelLayout.setVerticalGroup(
             userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(userRosterPanelLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                    .addComponent(userNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logInButton)
                     .addComponent(logOutButton)
                     .addComponent(jLabel2))
                 .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(userRosterPanelLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel5)
-                        .addGap(4, 4, 4)
-                        .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jRadioButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(teamAndPlayerScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(userRosterPanelLayout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userRosterPanelLayout.createSequentialGroup()
-                                .addComponent(AddToRosterButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel12)
-                                .addGap(68, 68, 68))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userRosterPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rosterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(rosterScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(userRosterPanelLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel5)
+                        .addGap(7, 7, 7)
+                        .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(allRadioButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(teamAndPlayerScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(userRosterPanelLayout.createSequentialGroup()
+                                .addComponent(ravensRadioButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(steelersRadioButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(userRosterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(rosterPlayerTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(rosterFilterButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, userRosterPanelLayout.createSequentialGroup()
+                                .addComponent(AddToRosterButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(playersAddedLabel)
+                                .addGap(68, 68, 68)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
+
+        userRosterPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {rosterScrollPane, teamAndPlayerScrollPane});
 
         jTabbedPane1.addTab("User Roster", userRosterPanel);
 
@@ -296,7 +303,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Defense", "Kicker", "Quarterback", "Running Back", "Wide Receiver" }));
 
-        jButton5.setText("Filter");
+        jButton5.setText("Filter Roster");
 
         jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel16.setText("Roster");
@@ -344,7 +351,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                             .addComponent(jButton5)
                             .addGap(79, 79, 79)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(343, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,7 +369,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -382,22 +389,30 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable2);
 
         jLabel18.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
-        jLabel18.setText("Actual Teams");
+        jLabel18.setText(" Teams");
 
         jLabel14.setFont(new java.awt.Font("Lucida Grande", 2, 13)); // NOI18N
         jLabel14.setText("View Player Stats");
 
-        jLabel19.setText("Actual Team Stats");
-
-        jLabel20.setText("Teams:");
+        jLabel19.setText(" Team Stats");
 
         jRadioButton4.setText("Baltimore Ravens");
 
         jRadioButton5.setText("Pittsburgh Steelers");
 
-        jLabel21.setText("Player Type:");
+        jButton2.setText("Choose Team");
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Defense", "Kicker", "Quarterback", "Running Back", "Wide Receiver" }));
+        jScrollPane5.setViewportView(jList1);
+
+        jLabel23.setText("or...");
+
+        jLabel21.setText("User Teams");
+
+        jLabel24.setText("Player Type:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Defense", "Kicker", "Quarterback", "Running Back", "Wide Receiver" }));
+
+        jButton6.setText("Filter");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -408,52 +423,65 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton5)
-                                    .addComponent(jRadioButton4)))
-                            .addComponent(jLabel14)
-                            .addComponent(jLabel18)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2)
+                                .addGap(211, 211, 211)
+                                .addComponent(jLabel19))
+                            .addComponent(jLabel14)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel21)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(281, 281, 281)
-                        .addComponent(jLabel19))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(104, 104, 104))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton6))
+                            .addComponent(jRadioButton4)
+                            .addComponent(jRadioButton5)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(jLabel23))
+                            .addComponent(jLabel24)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel20)
-                            .addComponent(jRadioButton4))
+                        .addComponent(jButton2))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(1, 1, 1)
+                .addComponent(jLabel14)
+                .addGap(1, 1, 1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jRadioButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jRadioButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel21)
-                            .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel19)
+                        .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(115, Short.MAX_VALUE))
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6)))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout statsPanelLayout = new javax.swing.GroupLayout(statsPanel);
@@ -463,7 +491,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
             .addGroup(statsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(statsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 818, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -582,15 +610,12 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
         jButton3.setText("Delete");
 
-        jList3.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(jList3);
 
         jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel11.setText("Delete User");
+
+        jLabel12.setText("Players");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -605,7 +630,10 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel11)))
+                        .addComponent(jLabel11))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(jLabel12)))
                 .addContainerGap(202, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -613,21 +641,27 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        jList4.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(jList4);
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel22.setText("Users");
+
+        jButton1.setText("Enter Comments");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout usersPanelLayout = new javax.swing.GroupLayout(usersPanel);
         usersPanel.setLayout(usersPanelLayout);
@@ -639,22 +673,26 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                     .addGroup(usersPanelLayout.createSequentialGroup()
                         .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(usersPanelLayout.createSequentialGroup()
-                                .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(usersPanelLayout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addComponent(jLabel6)
-                                        .addGap(57, 57, 57))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, usersPanelLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)))
+                                .addGap(30, 30, 30)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(135, 135, 135)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(usersPanelLayout.createSequentialGroup()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(usersPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel6))
+                            .addGroup(usersPanelLayout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(jLabel22)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, usersPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(306, 306, 306))
         );
         usersPanelLayout.setVerticalGroup(
             usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -664,16 +702,17 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(usersPanelLayout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(usersPanelLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(usersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         usersPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jPanel4, jPanel5});
@@ -685,12 +724,13 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 761, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 730, Short.MAX_VALUE)
         );
 
         pack();
@@ -700,25 +740,31 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AddToRosterButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void userNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_userNameTextFieldActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void ravensRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ravensRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_ravensRadioButtonActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void steelersRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_steelersRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_steelersRadioButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void rosterFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rosterFilterButtonActionPerformed
+     //  DefaultListModel filteredListModel = new DefaultListModel();
+      // String sql;
+       //try{
+        //    if(teamGroupUserRoster.getSelection() == allRadioButton.getModel() ){
+    
+        //    }
+       //}
+    }//GEN-LAST:event_rosterFilterButtonActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void allRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_allRadioButtonActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -727,6 +773,10 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -765,17 +815,19 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddToRosterButton;
+    private javax.swing.JList PlayerList;
+    private javax.swing.JRadioButton allRadioButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
-    private javax.swing.JComboBox jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -788,8 +840,10 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -798,39 +852,43 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
-    private javax.swing.JList jList2;
     private javax.swing.JList jList3;
     private javax.swing.JList jList4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton logInButton;
     private javax.swing.JButton logOutButton;
+    private javax.swing.JLabel playersAddedLabel;
+    private javax.swing.JRadioButton ravensRadioButton;
+    private javax.swing.JButton rosterFilterButton;
+    private javax.swing.JList rosterList;
+    private javax.swing.JComboBox rosterPlayerTypeComboBox;
     private javax.swing.JScrollPane rosterScrollPane;
     private javax.swing.JPanel statsPanel;
+    private javax.swing.JRadioButton steelersRadioButton;
     private javax.swing.JScrollPane teamAndPlayerScrollPane;
     private javax.swing.ButtonGroup teamGroupStats;
     private javax.swing.ButtonGroup teamGroupUserRoster;
+    private javax.swing.JTextField userNameTextField;
     private javax.swing.JPanel userRosterPanel;
     private javax.swing.JPanel usersPanel;
     // End of variables declaration//GEN-END:variables
