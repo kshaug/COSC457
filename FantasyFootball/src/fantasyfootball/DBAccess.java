@@ -269,7 +269,7 @@ public class DBAccess {
         return sorted_data;
         }
         
-<
+
         
         data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
                 + ".LNAME FROM " + pos + " WHERE " + pos + ".PROTEAM=" + teamname);//select all players of a position from the Ravens
