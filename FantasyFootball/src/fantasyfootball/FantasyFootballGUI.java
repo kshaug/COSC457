@@ -794,32 +794,38 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         DefaultListModel filteredListModel = new DefaultListModel();
        try{
             if(teamGroupUserRoster.getSelection().equals(allRadioButton.getModel()) ){
+               //Object selection = rosterPlayerTypeComboBox.getSelectedItem();
                HashMap hm = db.returnAllNames();
-               Collection c = hm.values();
-               Iterator itr = c.iterator();
-               while(itr.hasNext()){
-                   String theString = itr.next().toString();
+               Collection vc = hm.values();
+               Collection kc = hm.keySet();
+               Iterator itr = vc.iterator();
+               Iterator itr2 = kc.iterator();
+               while(itr.hasNext()&&itr2.hasNext()){
+                   String theString = itr.next().toString() + " " + itr2.next().toString();
                    System.out.println(theString);
                    filteredListModel.addElement(theString);
                }
                playerList.setModel(filteredListModel);
-               
-            }else if(teamGroupUserRoster.getSelection().equals(ravensRadioButton.getModel())){
+               }else if(teamGroupUserRoster.getSelection().equals(ravensRadioButton.getModel())){
                HashMap hm = db.returnRavens();
-               Collection c = hm.values();
-               Iterator itr = c.iterator();
-               while(itr.hasNext()){
-                   String theString = itr.next().toString();
+               Collection vc = hm.values();
+               Collection kc = hm.keySet();
+               Iterator itr = vc.iterator();
+               Iterator itr2 = kc.iterator();
+               while(itr.hasNext()&&itr2.hasNext()){
+                   String theString = itr.next().toString() + " " + itr2.next().toString();
                    System.out.println(theString);
                    filteredListModel.addElement(theString);
                }
                playerList.setModel(filteredListModel);
             }else if(teamGroupUserRoster.getSelection().equals(steelersRadioButton.getModel())){
                HashMap hm = db.returnSteelers();
-               Collection c = hm.values();
-               Iterator itr = c.iterator();
-               while(itr.hasNext()){
-                   String theString = itr.next().toString();
+               Collection vc = hm.values();
+               Collection kc = hm.keySet();
+               Iterator itr = vc.iterator();
+               Iterator itr2 = kc.iterator();
+               while(itr.hasNext() && itr2.hasNext()){
+                   String theString = itr.next().toString() + " " +itr2.next().toString();
                    System.out.println(theString);
                    filteredListModel.addElement(theString);
             }
