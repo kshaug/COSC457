@@ -223,11 +223,8 @@ public class DBAccess {
         return sorted_data;
     }
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 43b1db54d69acd7a7efe4a3a0013838b554fc19e
+
+
     public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
         HashMap<String, String> sorted_data = new HashMap<String, String>();
         //returns players that belong to team teamname and are at position pos
@@ -248,8 +245,5 @@ public class DBAccess {
                  }
         return sorted_data;
     }
-<<<<<<< HEAD
->>>>>>> 43b1db54d69acd7a7efe4a3a0013838b554fc19e
-=======
->>>>>>> 43b1db54d69acd7a7efe4a3a0013838b554fc19e
+
 }
