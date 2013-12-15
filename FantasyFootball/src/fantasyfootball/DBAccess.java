@@ -26,7 +26,7 @@ public class DBAccess {
          }catch(ClassNotFoundException e){
          System.out.println(e);}*/
         DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
-        this.dbConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/FantasyFootball;create=true;");
+        this.dbConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/FantasyFootball");
         this.statement = this.dbConnection.createStatement();
     }
 
@@ -37,13 +37,15 @@ public class DBAccess {
 
     public String createUser(String lname, String fname, int age, String username, Date bdate) {
         try {
-            String exe = "INSERT INTO TEAM VALUES(null, null, null, null, null, null," + username + ")";
-            System.out.println(exe);
-            this.statement.executeUpdate("INSERT INTO TEAM VALUES(null, null, null, null, null, null," + username + ")");
+            
             String useradd = "INSERT INTO FANTASYUSER VALUES(" + String.valueOf(age)
-                    + ", " + fname + ", " + lname + ", " + username + ", '" + bdate.toString() + "')"; //insert command
+                    + ", " + fname + ", " + lname + ", " + username + ", '" + bdate.toString() + "', null)"; //insert command
 
             this.statement.executeUpdate(useradd); //execute insert
+            String exe = "INSERT INTO TEAM (QB_UUID, RB_UUID, WR1_UUID, WR2_UUID, K_UUID,  DEFST_UUID, USERNAME) VALUES(null, null, null, null, null, null," + username + ")";
+            System.out.println(exe);
+            this.statement.executeUpdate(exe);
+            
         } catch (SQLException e) {
             return e.getMessage();//if excepted return error
         }
@@ -222,6 +224,7 @@ public class DBAccess {
         }
         return sorted_data;
     }
+<<<<<<< HEAD
     
 
 
@@ -233,6 +236,15 @@ public class DBAccess {
         HashMap<String, String> sorted_data = new HashMap<String, String>();
         ResultSet data;
 
+=======
+   
+
+
+
+    public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
+        HashMap<String, String> sorted_data = new HashMap<String, String>();
+        ResultSet data;
+>>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
         //returns players that belong to team teamname and are at position pos
         if(teamname=="PIT")//just use "PIT" or "BAL" in method call
         {
@@ -243,8 +255,11 @@ public class DBAccess {
             teamname="'Baltimore Ravens'";
         }
 
+<<<<<<< HEAD
      //   ResultSet data;
 
+=======
+>>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
         else if(teamname=="ALL")
         {
             data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
@@ -255,7 +270,10 @@ public class DBAccess {
         return sorted_data;
         }
         
+<<<<<<< HEAD
 
+=======
+>>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
         
         data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
                 + ".LNAME FROM " + pos + " WHERE " + pos + ".PROTEAM=" + teamname);//select all players of a position from the Ravens
@@ -266,7 +284,10 @@ public class DBAccess {
     }
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
     
     public ArrayList<String> getUser() throws SQLException//returns an ArrayList of all usernames
     {
@@ -288,5 +309,8 @@ public class DBAccess {
        String name = data.getString(1);
        return name;
    }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
 }
