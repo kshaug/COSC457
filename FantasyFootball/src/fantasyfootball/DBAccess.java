@@ -26,7 +26,7 @@ public class DBAccess {
          }catch(ClassNotFoundException e){
          System.out.println(e);}*/
         DriverManager.registerDriver(new org.apache.derby.jdbc.ClientDriver());
-        this.dbConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/FantasyFootball");
+        this.dbConnection = DriverManager.getConnection("jdbc:derby://localhost:1527/FantasyFootball;create=true;");
         this.statement = this.dbConnection.createStatement();
     }
 
@@ -219,6 +219,27 @@ public class DBAccess {
                 sorted_data.put(data.getString(2), data.getString(1));
                  }
         }
+        return sorted_data;
+    }
+    
+    public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
+        HashMap<String, String> sorted_data = new HashMap<String, String>();
+        //returns players that belong to team teamname and are at position pos
+        if(teamname=="PIT")//just use "PIT" or "BAL" in method call
+        {
+            teamname="'Pittsburgh Steelers'";
+        }
+        else if(teamname=="BAL")
+        {
+            teamname="'Baltimore Ravens'";
+        }
+        ResultSet data;
+        
+        data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
+                + ".LNAME FROM " + pos + " WHERE " + pos + ".PROTEAM=" + teamname);//select all players of a position from the Ravens
+            while (data.next()) {//while names to get, store names in a hashmap in lastname:firstname format
+                sorted_data.put(data.getString(2), data.getString(1));
+                 }
         return sorted_data;
     }
 }
