@@ -224,6 +224,7 @@ public class DBAccess {
     
     public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
         HashMap<String, String> sorted_data = new HashMap<String, String>();
+        ResultSet data;
         //returns players that belong to team teamname and are at position pos
         if(teamname=="PIT")//just use "PIT" or "BAL" in method call
         {
@@ -233,7 +234,16 @@ public class DBAccess {
         {
             teamname="'Baltimore Ravens'";
         }
-        ResultSet data;
+        else if(teamname=="ALL")
+        {
+            data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
+                + ".LNAME FROM " + pos);//select all players of a position from the Ravens
+            while (data.next()) {//while names to get, store names in a hashmap in lastname:firstname format
+                sorted_data.put(data.getString(2), data.getString(1));
+                 }
+        return sorted_data;
+        }
+        
         
         data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
                 + ".LNAME FROM " + pos + " WHERE " + pos + ".PROTEAM=" + teamname);//select all players of a position from the Ravens
