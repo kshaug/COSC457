@@ -7,7 +7,7 @@ package fantasyfootball;
 
 import java.util.HashMap;
 import java.sql.*;
-//import java.util.*;
+import java.util.ArrayList;
 import org.apache.derby.jdbc.ClientDriver;
 
 /**
@@ -252,4 +252,25 @@ public class DBAccess {
                  }
         return sorted_data;
     }
+    
+    public ArrayList<String> getUser() throws SQLException//returns an ArrayList of all usernames
+    {
+        ArrayList<String> usernames = new ArrayList();
+        ResultSet data = this.statement.executeQuery("SELECT USERNAME FROM FANTASYUSER");
+        
+        while(data.next())
+        {
+            usernames.add(data.getString(1));
+        }
+        
+        return usernames;
+    }
+    
+   public String getUser(String username) throws SQLException
+   {
+       ResultSet data = this.statement.executeQuery("SELECT FNAME FROM FANTASYUSER WHERE USERNAME='" + username + "'");
+       data.next();
+       String name = data.getString(1);
+       return name;
+   }
 }
