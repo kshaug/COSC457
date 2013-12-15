@@ -793,43 +793,180 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         }
         DefaultListModel filteredListModel = new DefaultListModel();
        try{
+            int selection = rosterPlayerTypeComboBox.getSelectedIndex();
+            Collection vc;
+            Collection kc;
+            Iterator itr;
+            Iterator itr2;
+            HashMap hm;
             if(teamGroupUserRoster.getSelection().equals(allRadioButton.getModel()) ){
-               //Object selection = rosterPlayerTypeComboBox.getSelectedItem();
-               HashMap hm = db.returnAllNames();
-               Collection vc = hm.values();
-               Collection kc = hm.keySet();
-               Iterator itr = vc.iterator();
-               Iterator itr2 = kc.iterator();
-               while(itr.hasNext()&&itr2.hasNext()){
-                   String theString = itr.next().toString() + " " + itr2.next().toString();
-                   System.out.println(theString);
-                   filteredListModel.addElement(theString);
+               
+               if(selection == 0){
+                    hm = db.returnPlayers("BAL", "QB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                }
+               }else{
+                
+                    hm = db.returnAllNames();
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
                }
                playerList.setModel(filteredListModel);
-               }else if(teamGroupUserRoster.getSelection().equals(ravensRadioButton.getModel())){
-               HashMap hm = db.returnRavens();
-               Collection vc = hm.values();
-               Collection kc = hm.keySet();
-               Iterator itr = vc.iterator();
-               Iterator itr2 = kc.iterator();
-               while(itr.hasNext()&&itr2.hasNext()){
-                   String theString = itr.next().toString() + " " + itr2.next().toString();
-                   System.out.println(theString);
-                   filteredListModel.addElement(theString);
+           }else if(teamGroupUserRoster.getSelection().equals(ravensRadioButton.getModel())){
+               if(selection==1){
+                    hm = db.returnPlayers("BAL","DEFST");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==2){
+                   hm = db.returnPlayers("BAL","K");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==3){
+                   hm = db.returnPlayers("BAL","QB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==4){
+                   hm = db.returnPlayers("BAL","RB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==5){
+                   hm = db.returnPlayers("BAL","WRTE");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==0){
+                    hm = db.returnRavens();
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+                   
                }
                playerList.setModel(filteredListModel);
             }else if(teamGroupUserRoster.getSelection().equals(steelersRadioButton.getModel())){
-               HashMap hm = db.returnSteelers();
-               Collection vc = hm.values();
-               Collection kc = hm.keySet();
-               Iterator itr = vc.iterator();
-               Iterator itr2 = kc.iterator();
-               while(itr.hasNext() && itr2.hasNext()){
-                   String theString = itr.next().toString() + " " +itr2.next().toString();
-                   System.out.println(theString);
-                   filteredListModel.addElement(theString);
-            }
+              if(selection==1){
+                    hm = db.returnPlayers("PIT","DEFST");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==2){
+                   hm = db.returnPlayers("PIT","K");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==3){
+                   hm = db.returnPlayers("PIT","QB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==4){
+                   hm = db.returnPlayers("PIT","RB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==5){
+                   hm = db.returnPlayers("PIT","WRTE");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==0){
+                    hm = db.returnSteelers();
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+                   
+               }
           }
+            playerList.setModel(filteredListModel);
        }catch(SQLException e){
            JOptionPane.showMessageDialog(null, e);
        }
