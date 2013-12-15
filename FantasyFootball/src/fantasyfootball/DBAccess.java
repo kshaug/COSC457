@@ -224,7 +224,7 @@ public class DBAccess {
         }
         return sorted_data;
     }
-<<<<<<< HEAD
+
     
 
 
@@ -232,11 +232,11 @@ public class DBAccess {
    // public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
      //   HashMap<String, String> sorted_data = new HashMap<String, String>();
 
-    public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
-        HashMap<String, String> sorted_data = new HashMap<String, String>();
-        ResultSet data;
+    //public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
+     //   HashMap<String, String> sorted_data = new HashMap<String, String>();
+      //  ResultSet data;
 
-=======
+
    
 
 
@@ -244,7 +244,7 @@ public class DBAccess {
     public HashMap<String, String> returnPlayers(String teamname, String pos) throws SQLException { 
         HashMap<String, String> sorted_data = new HashMap<String, String>();
         ResultSet data;
->>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
+
         //returns players that belong to team teamname and are at position pos
         if(teamname=="PIT")//just use "PIT" or "BAL" in method call
         {
@@ -255,11 +255,10 @@ public class DBAccess {
             teamname="'Baltimore Ravens'";
         }
 
-<<<<<<< HEAD
+
      //   ResultSet data;
 
-=======
->>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
+
         else if(teamname=="ALL")
         {
             data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
@@ -270,10 +269,7 @@ public class DBAccess {
         return sorted_data;
         }
         
-<<<<<<< HEAD
-
-=======
->>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
+<
         
         data = this.statement.executeQuery("SELECT " + pos + ".FNAME, " +pos + ""
                 + ".LNAME FROM " + pos + " WHERE " + pos + ".PROTEAM=" + teamname);//select all players of a position from the Ravens
@@ -284,10 +280,7 @@ public class DBAccess {
     }
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
     
     public ArrayList<String> getUser() throws SQLException//returns an ArrayList of all usernames
     {
@@ -309,8 +302,5 @@ public class DBAccess {
        String name = data.getString(1);
        return name;
    }
-<<<<<<< HEAD
 
-=======
->>>>>>> f234e6c942a28eae90c7dcb176136a0262f98701
 }
