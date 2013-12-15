@@ -7,7 +7,8 @@
 package fantasyfootball;
 import fantasyfootball.DBAccess;
 import java.sql.*;
-
+import java.util.Map;
+import java.util.HashMap;
 /**
  *
  * @author area51
@@ -21,6 +22,11 @@ public class FantasyTester {
        Date bday = new Date(10000000);
        
        System.out.println(bday.getClass());
+       HashMap<String, String> x = dba.returnAllNames();
+       for(Map.Entry entry : x.entrySet())
+       {
+           System.out.println(entry.getKey() + "," + entry.getValue());
+       }
        
        String check = dba.createUser("'Shaggy'", "'Kevin'", 20, "'cleddabest'", bday);
        
@@ -39,7 +45,7 @@ public class FantasyTester {
        System.out.println(draft_WR1);
        System.out.println(draft_WR2);
        
-       /*String drop_QB = dba.dropPlayer("DEFST", 1, "'cleddabest'");
+       String drop_QB = dba.dropPlayer("DEFST", 1, "'cleddabest'");
        String drop_RB = dba.dropPlayer("RB", 1, "'cleddabest'");
        String drop_K = dba.dropPlayer("K", 1, "'cleddabest'");
        String drop_WR1 = dba.dropPlayer("WRTE", 1, "'cleddabest'");
@@ -50,7 +56,7 @@ public class FantasyTester {
        System.out.println(drop_RB);
        System.out.println(drop_K);
        System.out.println(drop_WR1);
-       System.out.println(drop_WR2);*/
+       System.out.println(drop_WR2);
         
     }
 }
