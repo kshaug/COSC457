@@ -1048,7 +1048,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         }
         try{
         String name = db.getUser(input);
-        welcomeLabel.setText("Welcome "+ input);
+        welcomeLabel.("Welcome "+ input);
         }catch(SQLException e){
              JOptionPane.showMessageDialog(null, e);
         }
