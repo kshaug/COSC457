@@ -815,9 +815,8 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
             Iterator itr2;
             HashMap hm;
             if(teamGroupUserRoster.getSelection().equals(allRadioButton.getModel()) ){
-               
-               if(selection == 0){
-                    hm = db.returnPlayers("BAL", "QB");
+               if(selection==1){
+                    hm = db.returnPlayers("ALL","DEFST");
                     vc = hm.values();
                     kc = hm.keySet();
                     itr = vc.iterator();
@@ -826,9 +825,52 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                         String theString = itr.next().toString() + " " + itr2.next().toString();
                         System.out.println(theString);
                         filteredListModel.addElement(theString);
-                }
-               }else{
-                
+                    }
+               }else if(selection==2){
+                   hm = db.returnPlayers("ALL","K");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==3){
+                   hm = db.returnPlayers("ALL","QB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==4){
+                   hm = db.returnPlayers("ALL","RB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==5){
+                   hm = db.returnPlayers("ALL","WRTE");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==0){
                     hm = db.returnAllNames();
                     vc = hm.values();
                     kc = hm.keySet();
@@ -839,7 +881,9 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                         System.out.println(theString);
                         filteredListModel.addElement(theString);
                     }
+                   
                }
+               
                playerList.setModel(filteredListModel);
            }else if(teamGroupUserRoster.getSelection().equals(ravensRadioButton.getModel())){
                if(selection==1){
