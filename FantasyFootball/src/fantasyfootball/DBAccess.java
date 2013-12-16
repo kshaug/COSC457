@@ -302,5 +302,270 @@ public class DBAccess {
        String name = data.getString(1);
        return name;
    }
+   
+   public HashMap<String, ArrayList<Integer>> returnStats(String pos, String teamname) throws SQLException
+   {
+       HashMap<String, ArrayList<Integer>> sorted_data = new HashMap();
+       ResultSet data;
+       if(teamname == "PIT")
+       {
+           data = this.statement.executeQuery("SELECT * FROM " + pos + " WHERE " + pos + ".PROTEAM='Pittsburgh Steelers'");
+           int count=1;
+           String full_name = "";
+           ArrayList<Integer> stats = new ArrayList();
+               switch(pos)
+               {
+                   case "QB":
+                       while(data.next())
+                       {
+                           full_name = data.getString(9) + " " + data.getString(11);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                   case "WRTE":
+                       while(data.next())
+                       {
+                           full_name = data.getString(10) + " " + data.getString(12);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           stats.add(data.getInt(9));
+                           sorted_data.put(full_name, stats);
+                           
+                       }
+                   case "DEFST":
+                       while(data.next())
+                       {
+                           full_name = data.getString(9) + " " + data.getString(11);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                   case "K":
+                       while(data.next())
+                       {
+                           full_name = data.getString(9) + " " + data.getString(11);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                   case "RB":
+                       while(data.next())
+                       {
+                           full_name = data.getString(10) + " " + data.getString(12);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                       
+                }
+           
+           return sorted_data;
+           
+       }
+       
+       if(teamname == "BAL")
+       {
+           data = this.statement.executeQuery("SELECT * FROM " + pos + " WHERE " + pos + ".PROTEAM='Baltimore Ravens'");
+           int count=0;
+           String full_name = "";
+           ArrayList<Integer> stats = new ArrayList();
+            switch(pos)
+               {
+                   case "QB":
+                       while(data.next())
+                       {
+                           full_name = data.getString(9) + " " + data.getString(11);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                   case "WRTE":
+                       while(data.next())
+                       {
+                           full_name = data.getString(10) + " " + data.getString(12);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           stats.add(data.getInt(9));
+                           sorted_data.put(full_name, stats);
+                           
+                       }
+                   case "DEFST":
+                       while(data.next())
+                       {
+                           full_name = data.getString(9) + " " + data.getString(11);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                   case "K":
+                       while(data.next())
+                       {
+                           full_name = data.getString(9) + " " + data.getString(11);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                   case "RB":
+                       while(data.next())
+                       {
+                           full_name = data.getString(10) + " " + data.getString(12);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                       
+                }
+           
+           return sorted_data;
+           
+       }
+       else
+       {
+           data = this.statement.executeQuery("SELECT * FROM " + pos);
+           int count=0;
+           String full_name = "";
+           ArrayList<Integer> stats = new ArrayList();
+           switch(pos)
+               {
+                   case "QB":
+                       while(data.next())
+                       {
+                           full_name = data.getString(9) + " " + data.getString(11);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                   case "WRTE":
+                       while(data.next())
+                       {
+                           full_name = data.getString(10) + " " + data.getString(12);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           stats.add(data.getInt(9));
+                           sorted_data.put(full_name, stats);
+                           
+                       }
+                   case "DEFST":
+                       while(data.next())
+                       {
+                           full_name = data.getString(9) + " " + data.getString(11);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                   case "K":
+                       while(data.next())
+                       {
+                           full_name = data.getString(9) + " " + data.getString(11);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                   case "RB":
+                       while(data.next())
+                       {
+                           full_name = data.getString(10) + " " + data.getString(12);
+                           stats.add(data.getInt(1));
+                           stats.add(data.getInt(2));
+                           stats.add(data.getInt(3));
+                           stats.add(data.getInt(4));
+                           stats.add(data.getInt(5));
+                           stats.add(data.getInt(6));
+                           stats.add(data.getInt(7));
+                           stats.add(data.getInt(8));
+                           sorted_data.put(full_name, stats);
+                       }
+                       
+                }
+           
+           return sorted_data;
+           
+       }
+   }
 
 }
