@@ -19,6 +19,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableColumn;
+import net.proteanit.sql.DbUtils;
 import org.apache.derby.iapi.types.SQLDate;
 import static org.eclipse.persistence.expressions.ExpressionOperator.except;
 
@@ -85,20 +87,20 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        statsTable1 = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
+        StatsRavensRadioButton = new javax.swing.JRadioButton();
+        StatsSteelersRadioButton = new javax.swing.JRadioButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList();
         jLabel23 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton6 = new javax.swing.JButton();
+        statsPositionComboBox = new javax.swing.JComboBox();
+        statsFilterButton = new javax.swing.JButton();
         usersPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -401,7 +403,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        statsTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -412,7 +414,7 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable2);
+        jScrollPane4.setViewportView(statsTable1);
 
         jLabel18.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel18.setText(" Teams");
@@ -422,9 +424,11 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
         jLabel19.setText(" Team Stats");
 
-        jRadioButton4.setText("Baltimore Ravens");
+        teamGroupStats.add(StatsRavensRadioButton);
+        StatsRavensRadioButton.setText("Baltimore Ravens");
 
-        jRadioButton5.setText("Pittsburgh Steelers");
+        teamGroupStats.add(StatsSteelersRadioButton);
+        StatsSteelersRadioButton.setText("Pittsburgh Steelers");
 
         jButton2.setText("Choose Team");
 
@@ -436,9 +440,14 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
         jLabel24.setText("Player Position:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Defense", "Kicker", "Quarterback", "Running Back", "Wide Receiver" }));
+        statsPositionComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Defense", "Kicker", "Quarterback", "Running Back", "Wide Receiver" }));
 
-        jButton6.setText("Filter");
+        statsFilterButton.setText("Filter");
+        statsFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statsFilterButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -459,11 +468,11 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(statsPositionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6))
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton5)
+                                .addComponent(statsFilterButton))
+                            .addComponent(StatsRavensRadioButton)
+                            .addComponent(StatsSteelersRadioButton)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addComponent(jLabel23))
@@ -491,9 +500,9 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton4)
+                        .addComponent(StatsRavensRadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton5)
+                        .addComponent(StatsSteelersRadioButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel23)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -504,8 +513,8 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
                         .addComponent(jLabel24)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton6)))
+                            .addComponent(statsPositionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(statsFilterButton)))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
@@ -1099,6 +1108,234 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
        
     }//GEN-LAST:event_logInButtonActionPerformed
 
+    private void statsFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statsFilterButtonActionPerformed
+        DBAccess db = null;
+        try {
+            db = new DBAccess();
+        } catch (SQLException ex) {
+            Logger.getLogger(FantasyFootballGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultListModel filteredListModel = new DefaultListModel();
+       try{
+            int selection = statsPositionComboBox.getSelectedIndex();
+            Collection vc;
+            Collection kc;
+            Iterator itr;
+            Iterator itr2;
+            HashMap hm;
+            if(teamGroupStats.getSelection().equals(StatsRavensRadioButton.getModel()) ){
+               if(selection==1){
+                    hm = db.returnStats("DEFST","BAL");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    statsTable1.setModel();
+               }else if(selection==2){
+                   hm = db.returnPlayers("ALL","K");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==3){
+                   hm = db.returnPlayers("ALL","QB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==4){
+                   hm = db.returnPlayers("ALL","RB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==5){
+                   hm = db.returnPlayers("ALL","WRTE");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==0){
+                    hm = db.returnAllNames();
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+                   
+               }
+               
+               playerList.setModel(filteredListModel);
+           }else if(teamGroupUserRoster.getSelection().equals(ravensRadioButton.getModel())){
+               if(selection==1){
+                    hm = db.returnPlayers("BAL","DEFST");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==2){
+                   hm = db.returnPlayers("BAL","K");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==3){
+                   hm = db.returnPlayers("BAL","QB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==4){
+                   hm = db.returnPlayers("BAL","RB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==5){
+                   hm = db.returnPlayers("BAL","WRTE");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==0){
+                    hm = db.returnRavens();
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+                   
+               }
+               playerList.setModel(filteredListModel);
+            }else if(teamGroupUserRoster.getSelection().equals(steelersRadioButton.getModel())){
+              if(selection==1){
+                    hm = db.returnPlayers("PIT","DEFST");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==2){
+                   hm = db.returnPlayers("PIT","K");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==3){
+                   hm = db.returnPlayers("PIT","QB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==4){
+                   hm = db.returnPlayers("PIT","RB");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==5){
+                   hm = db.returnPlayers("PIT","WRTE");
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+               }else if(selection==0){
+                    hm = db.returnSteelers();
+                    vc = hm.values();
+                    kc = hm.keySet();
+                    itr = vc.iterator();
+                    itr2 = kc.iterator();
+                    while(itr.hasNext()&&itr2.hasNext()){
+                        String theString = itr.next().toString() + " " + itr2.next().toString();
+                        System.out.println(theString);
+                        filteredListModel.addElement(theString);
+                    }
+                   
+               }
+          }
+            playerList.setModel(filteredListModel);
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, e);
+       }
+    }//GEN-LAST:event_statsFilterButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1137,6 +1374,8 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddToRosterButton;
+    private javax.swing.JRadioButton StatsRavensRadioButton;
+    private javax.swing.JRadioButton StatsSteelersRadioButton;
     private javax.swing.JTextField addUserUserNameTextField;
     private javax.swing.JRadioButton allRadioButton;
     private javax.swing.JList commentUsersList;
@@ -1148,8 +1387,6 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1179,8 +1416,6 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1192,7 +1427,6 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField lNameTextField;
@@ -1206,7 +1440,10 @@ public class FantasyFootballGUI extends javax.swing.JFrame {
     private javax.swing.JList rosterList;
     private javax.swing.JComboBox rosterPlayerTypeComboBox;
     private javax.swing.JScrollPane rosterScrollPane;
+    private javax.swing.JButton statsFilterButton;
     private javax.swing.JPanel statsPanel;
+    private javax.swing.JComboBox statsPositionComboBox;
+    private javax.swing.JTable statsTable1;
     private javax.swing.JRadioButton steelersRadioButton;
     private javax.swing.JScrollPane teamAndPlayerScrollPane;
     private javax.swing.ButtonGroup teamGroupStats;
