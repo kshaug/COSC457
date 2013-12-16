@@ -394,7 +394,7 @@ public class DBAccess {
            
        }
        
-       if(teamname == "BAL")
+       else if(teamname == "BAL")
        {
            data = this.statement.executeQuery("SELECT * FROM " + pos + " WHERE " + pos + ".PROTEAM='Baltimore Ravens'");
            int count=0;
@@ -566,6 +566,34 @@ public class DBAccess {
            return sorted_data;
            
        }
+   }
+   
+   public ResultSet returnStatTable(String pos, String teamname) throws SQLException
+   {
+       ResultSet data;
+       if(teamname == "PIT")
+       {
+           data = this.statement.executeQuery("SELECT * FROM " + pos + " WHERE " + pos + ".PROTEAM='Pittsburgh Steelers'");
+          
+                       
+        
+           
+           return data;
+           
+       }
+       
+       else if(teamname == "BAL")
+       {
+           data = this.statement.executeQuery("SELECT * FROM " + pos + " WHERE " + pos + ".PROTEAM='Baltimore Ravens'");
+          return data;
+           
+       }
+       else
+       {
+           data = this.statement.executeQuery("SELECT * FROM " + pos);
+           return data;
+                       
+                }
    }
 
 }
